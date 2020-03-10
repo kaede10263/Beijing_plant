@@ -10,13 +10,13 @@ class QuotesSpider(scrapy.Spider):
     def parse(self, response):
         search = []
         count = 0
-        with open(r"E:\Download\plant_crawler-20200309T010426Z-001\plant_crawler\plant_crawler\spiders\taiwan_plant.csv") as f:
+        with open(r"D:/GDbackup/PROJECT/tree/Beijing_plant/plant_crawler/plant_crawler/spiders/taiwan_plant.csv") as f:
             for line in f:
                 if not line.strip():
                     continue
                 search.append(line.split(",")[-1])
                 count += 1   
-                if (count == 10):
+                if (count == 3):
                     break
                 
         for name in search:
