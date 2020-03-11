@@ -8,15 +8,17 @@ class QuotesSpider(scrapy.Spider):
         ]
 
     def parse(self, response):
+        chunWei = "D:/GDbackup/PROJECT/tree/Beijing_plant/taiwan_plant.csv"
+        allen = ""
         search = []
         count = 0
-        with open(r"E:\Beijing_plant\taiwan_plant.csv") as f:
+        with open(chunWei) as f:
             for line in f:
                 if not line.strip():
                     continue
                 search.append(line.split(",")[-1])
                 count += 1   
-                if (count == 10):
+                if (count == 101):
                     break
                 
         for name in search:
@@ -51,7 +53,7 @@ class QuotesSpider(scrapy.Spider):
     def get_plant_info(self, response):
         self.logger.info(f"Visited {response.url}")
         items = PlantCrawlerItem()
-        name = response.meta.get('name')
+        name = response.meta.get('name').strip()
 
         if (response.css('h1 em::text').get() is not None):
             scientificName = " ".join((response.css('h1 em::text').get().strip().replace("\xa0", " ")
