@@ -24,11 +24,13 @@ class QuotesSpider(scrapy.Spider):
                         response,
                         formdata={'search': name},
                         callback=self.after_search,
+                        meta={"name": name},
                         dont_filter=True
                     )
 
     def after_search(self, response):
         plant_url = []
+        name = response.meta.get('name')
         for url in response.css('td'):
             link = url.css('a::attr(href)').extract()
             if (link != []):
@@ -36,14 +38,21 @@ class QuotesSpider(scrapy.Spider):
                 break
 
         if (plant_url != []):
-            yield scrapy.Request(plant_url[0], callback=self.get_plant_info)
+            yield scrapy.Request(plant_url[0], 
+                                callback=self.get_plant_info, 
+                                meta={"name": name},
+                                dont_filter=True)
         else:
-            yield scrapy.Request("http://tai2.ntu.edu.tw/", callback=self.get_plant_info, dont_filter=True)   
+            yield scrapy.Request("http://tai2.ntu.edu.tw/", 
+                                callback=self.get_plant_info, 
+                                meta={"name": name},
+                                dont_filter=True)   
 
     def get_plant_info(self, response):
         self.logger.info(f"Visited {response.url}")
         items = PlantCrawlerItem()
-        
+        name = response.meta.get('name')
+
         if (response.css('h1 em::text').get() is not None):
             scientificName = " ".join((response.css('h1 em::text').get().strip().replace("\xa0", " ")
                                 , response.css('h1::text')[1].get().strip().replace("\xa0", "")))
@@ -68,6 +77,8 @@ class QuotesSpider(scrapy.Spider):
             distribution = response.css("td::text").getall()
             distribution = "".join(distribution)
             items['distribution'] = distribution
+
+            items['originalName'] = name
         
         else:
             items['scientificName'] = ""
@@ -75,6 +86,7 @@ class QuotesSpider(scrapy.Spider):
             items['attribute'] = ""
             items['describe'] = ""
             items['distribution'] = ""
+            items['originalName'] = name
 
         yield items    
         

@@ -15,3 +15,4 @@ class PlantCrawlerItem(scrapy.Item):
     attribute = scrapy.Field()
     describe = scrapy.Field()
     distribution = scrapy.Field()
+    originalName = scrapy.Field()
