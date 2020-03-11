@@ -10,13 +10,13 @@ class QuotesSpider(scrapy.Spider):
     def parse(self, response):
         search = []
         count = 0
-        with open(r"D:/GDbackup/PROJECT/tree/Beijing_plant/plant_crawler/plant_crawler/spiders/taiwan_plant.csv") as f:
+        with open(r"E:\Beijing_plant\taiwan_plant.csv") as f:
             for line in f:
                 if not line.strip():
                     continue
                 search.append(line.split(",")[-1])
                 count += 1   
-                if (count == 3):
+                if (count == 10):
                     break
                 
         for name in search:
@@ -36,35 +36,45 @@ class QuotesSpider(scrapy.Spider):
                 break
 
         if (plant_url != []):
-            return scrapy.Request(plant_url[0], callback=self.get_plant_info)
+            yield scrapy.Request(plant_url[0], callback=self.get_plant_info)
+        else:
+            yield scrapy.Request("http://tai2.ntu.edu.tw/", callback=self.get_plant_info, dont_filter=True)   
 
     def get_plant_info(self, response):
-        self.logger.info("Visited %s", response.url)
+        self.logger.info(f"Visited {response.url}")
         items = PlantCrawlerItem()
         
-        scientificName = " ".join((response.css('h1 em::text').get().strip().replace("\xa0", " ")
+        if (response.css('h1 em::text').get() is not None):
+            scientificName = " ".join((response.css('h1 em::text').get().strip().replace("\xa0", " ")
                                 , response.css('h1::text')[1].get().strip().replace("\xa0", "")))
 
-        if (len(response.css('h1 em::text').getall()) > 1):
-            scientificName = " ".join((scientificName
+            if (len(response.css('h1 em::text').getall()) > 1):
+                scientificName = " ".join((scientificName
                                     , response.css('h1 em::text')[1].get().strip().replace("\xa0", " ")
                                     , response.css('h1::text')[2].get().strip().replace("\xa0", "")))
         
-        items['scientificName'] = scientificName
+            items['scientificName'] = scientificName
 
-        chineseName = response.css('h1::text')[-2].get().strip()
-        items['chineseName'] = chineseName
+            chineseName = response.css('h1::text')[-2].get().strip()
+            items['chineseName'] = chineseName
+            
+            attribute = response.css('h1 span::text').get(default='empty').strip()
+            items['attribute'] = attribute
+
+            describe = response.css("li::text").getall()
+            describe = "".join(describe)
+            items['describe'] = describe
+
+            distribution = response.css("td::text").getall()
+            distribution = "".join(distribution)
+            items['distribution'] = distribution
         
-        attribute = response.css('h1 span::text').get(default='empty').strip()
-        items['attribute'] = attribute
-
-        describe = response.css("li::text").getall()
-        describe = "".join(describe)
-        items['describe'] = describe
-
-        distribution = response.css("td::text").getall()
-        distribution = "".join(distribution)
-        items['distribution'] = distribution
+        else:
+            items['scientificName'] = ""
+            items['chineseName'] = ""
+            items['attribute'] = ""
+            items['describe'] = ""
+            items['distribution'] = ""
 
         yield items    
         
