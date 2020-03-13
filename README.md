@@ -16,10 +16,17 @@ Install anaconda and add anaconda into envirment path.
 conda create --name myenv python=3.6
 ```
 
-clone this github and use VM , and run this "pip install -r requirements.txt"
+clone this github and activate VM
 ```
 activate myenv
 ```
+
+and run this 
+
+``` 
+pip install -r requirements.txt
+``` 
+
 
 
 ## command use
