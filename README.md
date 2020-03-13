@@ -1,7 +1,13 @@
 # Beijing_plant
  
-web_scrapy for Beijing_plant
-We test spray for this project.
+Web_scrapy for Beijing_plant.We test spray for this project.
+
+First,scrapying the data in need .
+
+Second,Compare the same ScienceName and combine the useful data.
+
+The data we need is 
+![Alt text](图片链接 "picture/Image.png")
 
 
 ## envirment
