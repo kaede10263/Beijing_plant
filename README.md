@@ -48,10 +48,10 @@ do this command
 scrapy crawl plant_spyder
 ```
 
-You will get "hello.csv" in the path above
+You will get "hello.csv" in the path.
 
 ```
 python combine.py
 ```
 
-You will get "result.csv" in the path above
+You will get "result.csv" in the path.
