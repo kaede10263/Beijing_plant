@@ -7,7 +7,7 @@ First,scrapying the data in need .
 Second,Compare the same ScienceName and combine the useful data.
 
 The data we need is 
-<div><img src="https://github.com/kaede10263/Beijing_plant/blob/master/picture/Image.png"/></div>
+<img src="https://github.com/kaede10263/Beijing_plant/blob/master/picture/Image.png"/>
 
 
 
