@@ -74,7 +74,7 @@ class QuotesSpider(scrapy.Spider):
 
             describe = response.css("li::text").getall()
             describe = "".join(describe)
-            items['describe'] = describe
+            items['described'] = describe
 
             distribution = response.css("td::text").getall()
             distribution = "".join(distribution)
@@ -86,7 +86,7 @@ class QuotesSpider(scrapy.Spider):
             items['scientificName'] = ""
             items['chineseName'] = ""
             items['attribute'] = ""
-            items['describe'] = ""
+            items['described'] = ""
             items['distribution'] = ""
             items['originalName'] = name
 

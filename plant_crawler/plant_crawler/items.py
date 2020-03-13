@@ -13,6 +13,6 @@ class PlantCrawlerItem(scrapy.Item):
     scientificName = scrapy.Field()
     chineseName = scrapy.Field()
     attribute = scrapy.Field()
-    describe = scrapy.Field()
+    described = scrapy.Field()
     distribution = scrapy.Field()
     originalName = scrapy.Field()
