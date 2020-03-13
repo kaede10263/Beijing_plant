@@ -2,11 +2,11 @@
  
 Web_scrapy for Beijing_plant.We test spray for this project.
 
-First,scrapying the data in need from [Plants of Taiwan](http://tai2.ntu.edu.tw/PlantInfo.php)
+First,scrapying the data in need from [Plants of Taiwan](http://tai2.ntu.edu.tw/PlantInfo.php).
 
 Second,Compare the same ScienceName and combine the useful data.
 
-The data we need is 
+The data we need is here.
 <img src="https://github.com/kaede10263/Beijing_plant/blob/master/picture/Image.png"/>
 
 
