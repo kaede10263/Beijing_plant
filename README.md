@@ -23,8 +23,8 @@ activate myenv
 
 
 ## command use
-* ``` cd  D:\GDbackup\PROJECT\tree\Beijing_plant\plant_crawler```
-*  ```scrapy crawl plant_spyder```
+ ``` cd  D:\GDbackup\PROJECT\tree\Beijing_plant\plant_crawler```
+* ```scrapy crawl plant_spyder```
 *  (You will get "hello.csv" in the path above)
-* ```python combine.py```
+ ```python combine.py```
 *  (You will get "result.csv" in the path above)
