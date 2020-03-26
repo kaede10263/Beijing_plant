@@ -1,3 +1,4 @@
+# coding = utf-8
 import scrapy
 from ..items import PlantCrawlerItem
 
@@ -10,7 +11,7 @@ class QuotesSpider(scrapy.Spider):
     def parse(self, response):
         chunWei = "D:/GDbackup/PROJECT/tree/Beijing_plant/taiwan_plant.csv"
         allen = ""
-        jayron = "C:/Users/jayron/Desktop/Flora_of_TW_Dist/plant_crawler/taiwan_plant.csv"
+        jayron = "C:/Users/jayron/Desktop/Flora_of_TW_Dist/Beijing_plant/taiwan_plant.csv"
         search = []
         count = 0
         with open(jayron) as f:
