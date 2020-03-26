@@ -10,9 +10,10 @@ class QuotesSpider(scrapy.Spider):
     def parse(self, response):
         chunWei = "D:/GDbackup/PROJECT/tree/Beijing_plant/taiwan_plant.csv"
         allen = ""
+        jayron = "C:/Users/jayron/Desktop/Flora_of_TW_Dist/plant_crawler/taiwan_plant.csv"
         search = []
         count = 0
-        with open(chunWei) as f:
+        with open(jayron) as f:
             for line in f:
                 if not line.strip():
                     continue
