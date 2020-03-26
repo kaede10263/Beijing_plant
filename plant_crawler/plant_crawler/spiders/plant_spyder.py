@@ -20,8 +20,8 @@ class QuotesSpider(scrapy.Spider):
                     continue
                 search.append(line.split(",")[-1])
                 count += 1   
-                if (count == 101):
-                    break
+                # if (count == 101):
+                #     break
                 
         for name in search:
             yield scrapy.FormRequest.from_response(
